@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input, Label, Textarea } from '@/components/ui/input';
 import { Progress } from '@/components/ui/controls';
 import { ADDICTIONS, FREQUENCIES, TRIGGERS } from '@/lib/addictions';
+import { AddictionIcon, LeafMark } from '@/components/icons';
 import { useStore } from '@/lib/storage';
 import { cn, dayKey } from '@/lib/utils';
 
@@ -59,9 +60,11 @@ export default function OnboardingPage() {
 
   return (
     <div className="mx-auto min-h-screen w-full max-w-2xl px-5 py-8">
-      <div className="mb-8 flex items-center gap-2 font-display text-lg font-semibold">
-        <span className="grid h-9 w-9 place-items-center rounded-xl bg-forest-700 text-cream">🌿</span>
-        Quitopia
+      <div className="mb-8 flex items-center gap-2.5">
+        <span className="grid h-10 w-10 place-items-center rounded-full bg-forest-900 text-mint-300">
+          <LeafMark className="h-5 w-5" />
+        </span>
+        <span className="text-[19px] font-extrabold tracking-tightest">Quitopia</span>
       </div>
 
       <div className="mb-6">
@@ -119,7 +122,9 @@ export default function OnboardingPage() {
                         : 'border-forest-900/10 hover:border-forest-900/25 dark:border-cream/10 dark:hover:border-cream/25'
                     )}
                   >
-                    <span className="text-lg">{item.emoji}</span>
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-forest-900/[0.05] text-forest-700 dark:bg-cream-100/10 dark:text-mint-300">
+                      <AddictionIcon id={item.id} />
+                    </span>
                     <span className="flex-1 font-medium">{item.label}</span>
                     {active ? <Check className="h-4 w-4" /> : null}
                   </button>
@@ -135,7 +140,9 @@ export default function OnboardingPage() {
                     : 'border-forest-900/10 hover:border-forest-900/25 dark:border-cream/10 dark:hover:border-cream/25'
                 )}
               >
-                <span className="text-lg">✏️</span>
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-forest-900/[0.05] text-forest-700 dark:bg-cream-100/10 dark:text-mint-300">
+                  <AddictionIcon id="custom" />
+                </span>
                 <span className="flex-1 font-medium">Something else</span>
                 {addictions.includes('custom') ? <Check className="h-4 w-4" /> : null}
               </button>
