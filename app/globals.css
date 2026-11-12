@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,8 +6,7 @@
 
 @layer base {
   :root {
-    --font-inter: 'Inter', ui-sans-serif, system-ui, sans-serif;
-    --font-sora: 'Sora', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-jakarta: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
   }
 
   html {
@@ -16,51 +15,75 @@
   }
 
   body {
-    @apply bg-cream text-forest-900 antialiased;
-    font-family: var(--font-inter);
-    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    @apply bg-cream-100 text-forest-900 antialiased;
+    font-family: var(--font-jakarta);
+    font-feature-settings: 'ss01' on, 'cv01' on;
+    letter-spacing: -0.011em;
+    background-image:
+      radial-gradient(1100px 600px at 12% -8%, rgba(168, 230, 207, 0.28), transparent 62%),
+      radial-gradient(900px 500px at 100% 0%, rgba(217, 164, 122, 0.14), transparent 55%);
+    background-attachment: fixed;
   }
 
   .dark body {
-    @apply bg-forest-900 text-cream;
+    @apply bg-forest-950 text-cream-100;
+    background-image:
+      radial-gradient(900px 520px at 10% -10%, rgba(42, 129, 104, 0.22), transparent 60%),
+      radial-gradient(800px 480px at 100% 0%, rgba(217, 164, 122, 0.08), transparent 55%);
   }
 
   h1, h2, h3, h4 {
-    font-family: var(--font-sora);
-    letter-spacing: -0.02em;
+    font-family: var(--font-jakarta);
+    letter-spacing: -0.035em;
+    font-weight: 700;
   }
 
   ::selection {
-    @apply bg-mint text-forest-900;
+    @apply bg-mint-300 text-forest-900;
   }
 
   *:focus-visible {
-    @apply outline-none ring-2 ring-teal ring-offset-2 ring-offset-cream dark:ring-offset-forest-900;
+    @apply outline-none ring-2 ring-forest-500/60 ring-offset-2 ring-offset-cream-100 dark:ring-offset-forest-950;
   }
 
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
   ::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-forest-900/15 dark:bg-cream/15;
+    @apply rounded-full bg-forest-900/15 dark:bg-cream-100/15;
   }
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
+  ::-webkit-scrollbar-track { background: transparent; }
 }
 
 @layer components {
+  /* The single card surface used across the app. */
   .surface {
-    @apply rounded-2xl border border-forest-900/10 bg-white shadow-soft dark:border-cream/10 dark:bg-forest-800;
+    @apply rounded-3xl border border-forest-900/[0.07] bg-white/85 shadow-soft backdrop-blur-sm;
+  }
+  .dark .surface {
+    @apply border-cream-100/10 bg-forest-900/70;
+  }
+
+  .surface-flat {
+    @apply rounded-3xl border border-forest-900/[0.07] bg-white/60;
+  }
+  .dark .surface-flat {
+    @apply border-cream-100/10 bg-forest-900/40;
   }
 
   .muted {
-    @apply text-forest-900/60 dark:text-cream/60;
+    @apply text-forest-900/55 dark:text-cream-100/55;
   }
 
   .pill {
-    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium;
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold tracking-tight;
+  }
+
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-forest-900/45 dark:text-cream-100/45;
+  }
+
+  .display-number {
+    @apply font-display font-extrabold tracking-tightest;
+    font-variant-numeric: tabular-nums;
   }
 }
 
