@@ -62,6 +62,17 @@ vercel --prod   # production
 | `/accountability` | Partner details and a generated weekly report to copy, WhatsApp or email |
 | `/settings` | Profile, addictions, triggers, theme, reminders, PIN, export/import/reset |
 
+## Design system
+
+Calm, non-triggering, and deliberately quiet:
+
+- **Palette** — deep forest `#0B3B2E`, mint `#A8E6CF`, warm cream `#FAF6EC`, soft sand accent. Full light/dark parity.
+- **Type** — Plus Jakarta Sans throughout, with a tight display scale (`tracking-tightest`) for numbers and headings.
+- **Surfaces** — one `surface` class (rounded 1.9rem, 1px hairline border, soft shadow) used by every card, so nothing drifts.
+- **Iconography** — Lucide line icons only. No emoji anywhere in the product UI; the Quitopia mark is an inline SVG leaf.
+- **Motion** — one spring on modals, one breath on the ring. Nothing bounces.
+- **Layout** — inset forest sidebar on desktop, five-item bottom bar on mobile.
+
 ## Stack
 
 - **Next.js 14** (App Router) + React 18 + TypeScript
