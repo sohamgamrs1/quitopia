@@ -6,7 +6,7 @@ import type { CheckIn, Slip } from '@/lib/storage';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-/** A year of squares, GitHub-style, built from check-ins and slips. */
+/** A year of squares, built from check-ins and slips. */
 export function StreakHeatmap({ checkins, slips }: { checkins: CheckIn[]; slips: Slip[] }) {
   const { weeks, monthLabels } = useMemo(() => {
     const clean = new Set(checkins.filter((c) => c.clean).map((c) => c.date));
@@ -15,7 +15,6 @@ export function StreakHeatmap({ checkins, slips }: { checkins: CheckIn[]; slips:
     const end = new Date();
     const start = new Date(end);
     start.setDate(start.getDate() - 363);
-    // align to Monday
     const offset = (start.getDay() + 6) % 7;
     start.setDate(start.getDate() - offset);
 
@@ -48,20 +47,20 @@ export function StreakHeatmap({ checkins, slips }: { checkins: CheckIn[]; slips:
   const colour = (level: number) => {
     switch (level) {
       case 1:
-        return 'bg-red-400/70 dark:bg-red-400/50';
+        return 'bg-[#E3A0A0]/70 dark:bg-[#E3A0A0]/40';
       case 3:
-        return 'bg-forest-600 dark:bg-mint';
+        return 'bg-forest-700 dark:bg-mint-400';
       case 2:
-        return 'bg-forest-900/10 dark:bg-cream/10';
+        return 'bg-forest-900/[0.06] dark:bg-cream-100/[0.08]';
       default:
-        return 'bg-forest-900/5 dark:bg-cream/5';
+        return 'bg-forest-900/[0.03] dark:bg-cream-100/[0.03]';
     }
   };
 
   return (
     <div className="overflow-x-auto">
       <div className="min-w-[720px]">
-        <div className="mb-1 grid grid-flow-col auto-cols-[14px] gap-[3px] text-[10px] text-forest-900/40 dark:text-cream/40">
+        <div className="mb-1.5 grid grid-flow-col auto-cols-[14px] gap-[3px] text-[10px] font-medium text-forest-900/35 dark:text-cream-100/35">
           {monthLabels.map((m) => (
             <span key={`${m.label}-${m.index}`} style={{ gridColumnStart: m.index + 1 }}>
               {m.label}
@@ -73,19 +72,20 @@ export function StreakHeatmap({ checkins, slips }: { checkins: CheckIn[]; slips:
             <div
               key={day.date}
               title={day.date}
-              className={`h-3.5 w-3.5 rounded-[3px] ${colour(day.level)}`}
+              className={`h-3.5 w-3.5 rounded-[4px] ${colour(day.level)}`}
             />
           ))}
         </div>
-        <div className="mt-3 flex items-center gap-3 text-[11px] text-forest-900/50 dark:text-cream/50">
-          <span className="flex items-center gap-1">
-            <i className="h-3 w-3 rounded-[3px] bg-red-400/70" /> slipped
+        <div className="mt-4 flex flex-wrap items-center gap-4 text-[11px] text-forest-900/45 dark:text-cream-100/45">
+          <span className="flex items-center gap-1.5">
+            <i className="h-3 w-3 rounded-[4px] bg-[#E3A0A0]/70" /> slipped
           </span>
-          <span className="flex items-center gap-1">
-            <i className="h-3 w-3 rounded-[3px] bg-forest-600 dark:bg-mint" /> checked in clean
+          <span className="flex items-center gap-1.5">
+            <i className="h-3 w-3 rounded-[4px] bg-forest-700 dark:bg-mint-400" /> clean
           </span>
-          <span className="flex items-center gap-1">
-            <i className="h-3 w-3 rounded-[3px] bg-forest-900/10 dark:bg-cream/10" /> no check-in
+          <span className="flex items-center gap-1.5">
+            <i className="h-3 w-3 rounded-[4px] bg-forest-900/[0.06] dark:bg-cream-100/[0.08]" /> no
+            check-in
           </span>
         </div>
       </div>

@@ -41,11 +41,11 @@ export function Pomodoro({ onComplete }: { onComplete?: () => void }) {
   const percent = 100 - (remaining / (length * 60)) * 100;
 
   return (
-    <div className="surface p-5">
-      <div className="flex items-center justify-between">
+    <div className="surface p-6">
+      <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h3 className="font-display text-base font-semibold">Focus session</h3>
-          <p className="muted text-xs">Blocker settings stay locked while the timer runs.</p>
+          <h3 className="text-[17px] font-bold tracking-tight">Focus session</h3>
+          <p className="muted mt-0.5 text-[12.5px]">Blocker settings stay locked while the timer runs.</p>
         </div>
         <Tabs
           tabs={[
@@ -57,23 +57,23 @@ export function Pomodoro({ onComplete }: { onComplete?: () => void }) {
         />
       </div>
 
-      <div className="mt-5 flex items-center gap-5">
+      <div className="mt-6 flex items-center gap-6">
         <div className="relative grid h-24 w-24 shrink-0 place-items-center">
           <svg viewBox="0 0 100 100" className="absolute inset-0 -rotate-90">
-            <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" strokeWidth="8" opacity="0.1" />
+            <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" strokeWidth="7" opacity="0.08" />
             <circle
               cx="50"
               cy="50"
               r="44"
               fill="none"
               stroke="currentColor"
-              strokeWidth="8"
+              strokeWidth="7"
               strokeLinecap="round"
               strokeDasharray={`${(percent / 100) * 276} 276`}
-              className="text-forest-600 dark:text-mint"
+              className="text-forest-700 dark:text-mint-300"
             />
           </svg>
-          <span className="font-display text-lg font-semibold tabular-nums">
+          <span className="display-number text-[19px] tabular-nums">
             {minutes}:{String(seconds).padStart(2, '0')}
           </span>
         </div>

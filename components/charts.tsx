@@ -20,7 +20,15 @@ import {
 import type { CheckIn, Slip } from '@/lib/storage';
 import { dayKey } from '@/lib/utils';
 
-const axisStyle = { fontSize: 11, fill: 'currentColor', opacity: 0.6 };
+const axisStyle = { fontSize: 11, fill: 'currentColor', opacity: 0.45, fontWeight: 500 };
+const tooltipStyle = {
+  borderRadius: 14,
+  border: '1px solid rgba(11,59,46,0.08)',
+  background: '#FDFBF6',
+  fontSize: 12,
+  padding: '8px 12px',
+  boxShadow: '0 12px 32px -18px rgba(11,59,46,0.35)'
+};
 
 export function UrgeTrendChart({ checkins }: { checkins: CheckIn[] }) {
   const data = [...checkins]
@@ -43,15 +51,12 @@ export function UrgeTrendChart({ checkins }: { checkins: CheckIn[] }) {
           <CartesianGrid strokeDasharray="3 3" stroke="currentColor" opacity={0.1} />
           <XAxis dataKey="date" tick={axisStyle} tickLine={false} axisLine={false} />
           <YAxis domain={[0, 10]} tick={axisStyle} tickLine={false} axisLine={false} />
-          <Tooltip
-            contentStyle={{ borderRadius: 12, border: 'none', fontSize: 12 }}
-            labelStyle={{ fontSize: 12 }}
-          />
+          <Tooltip contentStyle={tooltipStyle} labelStyle={{ fontSize: 12, fontWeight: 600 }} />
           <Line
             type="monotone"
             dataKey="urge"
             name="Urge"
-            stroke="#2F8767"
+            stroke="#14584A"
             strokeWidth={2.5}
             dot={{ r: 2 }}
             activeDot={{ r: 5 }}
@@ -60,7 +65,7 @@ export function UrgeTrendChart({ checkins }: { checkins: CheckIn[] }) {
             type="monotone"
             dataKey="mood"
             name="Mood"
-            stroke="#A8E6CF"
+            stroke="#7FD8BC"
             strokeWidth={2.5}
             dot={false}
           />
@@ -76,8 +81,8 @@ export function CleanVsSlipChart({ checkins, slips }: { checkins: CheckIn[]; sli
   const slipped = slipDays.size;
 
   const data = [
-    { name: 'Clean days', value: clean, fill: '#2F8767' },
-    { name: 'Slip days', value: slipped, fill: '#E57373' }
+    { name: 'Clean days', value: clean, fill: '#14584A' },
+    { name: 'Slip days', value: slipped, fill: '#E3A0A0' }
   ];
 
   if (clean + slipped === 0) {
@@ -92,8 +97,8 @@ export function CleanVsSlipChart({ checkins, slips }: { checkins: CheckIn[]; sli
             data={data}
             dataKey="value"
             nameKey="name"
-            innerRadius={45}
-            outerRadius={75}
+            innerRadius={52}
+            outerRadius={82}
             paddingAngle={3}
             stroke="none"
           >
@@ -106,7 +111,7 @@ export function CleanVsSlipChart({ checkins, slips }: { checkins: CheckIn[]; sli
             iconType="circle"
             formatter={(value) => <span className="text-xs">{value}</span>}
           />
-          <Tooltip contentStyle={{ borderRadius: 12, border: 'none', fontSize: 12 }} />
+          <Tooltip contentStyle={tooltipStyle} />
         </PieChart>
       </ResponsiveContainer>
     </div>
@@ -136,8 +141,8 @@ export function WeeklyUrgeBars({ checkins }: { checkins: CheckIn[] }) {
           <CartesianGrid strokeDasharray="3 3" stroke="currentColor" opacity={0.1} vertical={false} />
           <XAxis dataKey="day" tick={axisStyle} tickLine={false} axisLine={false} />
           <YAxis domain={[0, 10]} tick={axisStyle} tickLine={false} axisLine={false} />
-          <Tooltip contentStyle={{ borderRadius: 12, border: 'none', fontSize: 12 }} />
-          <Bar dataKey="urge" name="Average urge" radius={[6, 6, 0, 0]} fill="#2F8767" />
+          <Tooltip contentStyle={tooltipStyle} />
+          <Bar dataKey="urge" name="Average urge" radius={[8, 8, 0, 0]} fill="#14584A" barSize={22} />
         </BarChart>
       </ResponsiveContainer>
     </div>
@@ -168,12 +173,12 @@ export function MoodAreaChart({ checkins }: { checkins: CheckIn[] }) {
           <CartesianGrid strokeDasharray="3 3" stroke="currentColor" opacity={0.1} />
           <XAxis dataKey="date" tick={axisStyle} tickLine={false} axisLine={false} />
           <YAxis domain={[1, 5]} tick={axisStyle} tickLine={false} axisLine={false} />
-          <Tooltip contentStyle={{ borderRadius: 12, border: 'none', fontSize: 12 }} />
+          <Tooltip contentStyle={tooltipStyle} />
           <Area
             type="monotone"
             dataKey="mood"
             name="Mood"
-            stroke="#4FB3A2"
+            stroke="#1D6B57"
             strokeWidth={2}
             fill="url(#moodFill)"
           />
