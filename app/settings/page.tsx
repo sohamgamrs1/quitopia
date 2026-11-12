@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Separator, Switch } from '@/components/ui/controls';
 import { Input, Label } from '@/components/ui/input';
 import { ADDICTIONS, TRIGGERS } from '@/lib/addictions';
+import { AddictionIcon } from '@/components/icons';
 import { useStore } from '@/lib/storage';
 import { cn, dayKey } from '@/lib/utils';
 
@@ -138,7 +139,7 @@ export default function SettingsPage() {
                         : 'border-forest-900/15 dark:border-cream/15'
                     )}
                   >
-                    {item.emoji} {item.label}
+                    <AddictionIcon id={item.id} className="mr-1.5 inline h-3.5 w-3.5" /> {item.label}
                   </button>
                 );
               })}
