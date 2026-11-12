@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Quitopia Blocker</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    width: 320px; margin: 0; padding: 16px;
+    font-family: Inter, system-ui, sans-serif; font-size: 13px;
+    background: #FFF8E7; color: #0F3D2E;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { background: #07110D; color: #FFF8E7; }
+    .card { background: #0B2E22; border-color: #1F6B4F; }
+    input, textarea { background: #0B2E22; color: #FFF8E7; border-color: #1F6B4F; }
+  }
+  h1 { font-size: 15px; margin: 0 0 2px; display: flex; align-items: center; gap: 6px; }
+  p.sub { margin: 0 0 12px; opacity: .6; font-size: 11px; }
+  .card { border: 1px solid #E6DFC8; border-radius: 12px; padding: 12px; margin-bottom: 10px; background: #fff; }
+  label { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 0; }
+  input[type="text"], textarea {
+    width: 100%; box-sizing: border-box; border: 1px solid #E6DFC8; border-radius: 8px;
+    padding: 8px; font: inherit; resize: vertical;
+  }
+  textarea { min-height: 70px; }
+  button {
+    width: 100%; border: 0; border-radius: 999px; padding: 10px; font: inherit;
+    font-weight: 600; background: #0F3D2E; color: #FFF8E7; cursor: pointer; margin-top: 8px;
+  }
+  @media (prefers-color-scheme: dark) { button { background: #A8E6CF; color: #07110D; } }
+  .count { opacity: .6; font-size: 11px; margin-top: 6px; }
+</style>
+</head>
+<body>
+  <h1>🌿 Quitopia Blocker</h1>
+  <p class="sub">Local only · nothing leaves this browser</p>
+
+  <div class="card">
+    <label>Blocking enabled <input type="checkbox" id="enabled" /></label>
+    <label>Force safe search <input type="checkbox" id="safeSearch" /></label>
+    <label>YouTube restricted <input type="checkbox" id="youtubeRestricted" /></label>
+  </div>
+
+  <div class="card">
+    <textarea id="domains" placeholder="One domain per line"></textarea>
+    <div class="count" id="domainCount"></div>
+    <button id="save">Save blocklist</button>
+  </div>
+
+  <div class="card">
+    <textarea id="keywords" placeholder="One keyword per line"></textarea>
+    <button id="saveKeywords">Save keywords</button>
+  </div>
+
+  <button id="export">Export settings as JSON</button>
+  <script src="popup.js"></script>
+</body>
+</html>
