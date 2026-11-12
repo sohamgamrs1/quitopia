@@ -4,25 +4,25 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-all focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98]',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-semibold tracking-tight transition-all duration-200 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-45 active:scale-[0.985]',
   {
     variants: {
       variant: {
         default:
-          'bg-forest-700 text-cream shadow-soft hover:bg-forest-600 dark:bg-mint dark:text-forest-900 dark:hover:bg-mint-soft',
+          'bg-forest-900 text-cream-50 shadow-soft hover:bg-forest-800 dark:bg-mint-300 dark:text-forest-950 dark:hover:bg-mint-200',
         secondary:
-          'bg-mint text-forest-900 hover:bg-mint-soft dark:bg-forest-600 dark:text-cream dark:hover:bg-forest-500',
+          'bg-mint-300 text-forest-900 hover:bg-mint-200 dark:bg-forest-700 dark:text-cream-100 dark:hover:bg-forest-600',
         outline:
-          'border border-forest-900/15 bg-transparent text-forest-900 hover:bg-forest-900/5 dark:border-cream/20 dark:text-cream dark:hover:bg-cream/10',
+          'border border-forest-900/15 bg-white/50 text-forest-900 hover:border-forest-900/30 hover:bg-white dark:border-cream-100/20 dark:bg-transparent dark:text-cream-100 dark:hover:bg-cream-100/10',
         ghost:
-          'bg-transparent text-forest-900 hover:bg-forest-900/5 dark:text-cream dark:hover:bg-cream/10',
+          'bg-transparent text-forest-900/70 hover:bg-forest-900/[0.06] hover:text-forest-900 dark:text-cream-100/70 dark:hover:bg-cream-100/10',
         danger: 'bg-red-600 text-white hover:bg-red-500',
         sos: 'bg-red-600 text-white shadow-lift hover:bg-red-500'
       },
       size: {
-        sm: 'h-9 px-4 text-xs',
-        default: 'h-11 px-6',
-        lg: 'h-14 px-8 text-base',
+        sm: 'h-9 px-4 text-[13px]',
+        default: 'h-11 px-6 text-sm',
+        lg: 'h-14 px-8 text-[15px]',
         icon: 'h-10 w-10'
       }
     },
