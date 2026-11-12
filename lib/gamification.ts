@@ -4,20 +4,18 @@ import { CheckIn } from './storage';
 export interface LevelDef {
   name: string;
   minXp: number;
-  emoji: string;
 }
 
 export const LEVELS: LevelDef[] = [
-  { name: 'Seedling', minXp: 0, emoji: '🌱' },
-  { name: 'Sprout', minXp: 100, emoji: '🌿' },
-  { name: 'Warrior', minXp: 300, emoji: '⚔️' },
-  { name: 'Master', minXp: 700, emoji: '🛡️' },
-  { name: 'Legend', minXp: 1500, emoji: '👑' }
+  { name: 'Seedling', minXp: 0 },
+  { name: 'Sprout', minXp: 100 },
+  { name: 'Warrior', minXp: 300 },
+  { name: 'Master', minXp: 700 },
+  { name: 'Legend', minXp: 1500 }
 ];
 
 export interface LevelInfo {
   name: string;
-  emoji: string;
   index: number;
   next: LevelDef | null;
   progress: number;
@@ -36,7 +34,6 @@ export function levelFor(xp: number): LevelInfo {
     : 100;
   return {
     name: current.name,
-    emoji: current.emoji,
     index,
     next,
     progress,

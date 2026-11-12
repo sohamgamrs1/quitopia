@@ -1,7 +1,6 @@
 export interface AddictionDef {
   id: string;
   label: string;
-  emoji: string;
   /** Typical daily spend in rupees, used as the default for the money-saved calculator. */
   defaultDailySpend: number;
   /** Typical minutes lost per day, used for the time-saved estimate. */
@@ -22,7 +21,6 @@ export const ADDICTIONS: AddictionDef[] = [
   {
     id: 'porn',
     label: 'Pornography',
-    emoji: '🌱',
     defaultDailySpend: 0,
     defaultMinutesPerDay: 45,
     recovery: genericRecovery
@@ -30,7 +28,6 @@ export const ADDICTIONS: AddictionDef[] = [
   {
     id: 'masturbation',
     label: 'Compulsive masturbation',
-    emoji: '🌿',
     defaultDailySpend: 0,
     defaultMinutesPerDay: 30,
     recovery: genericRecovery
@@ -38,7 +35,6 @@ export const ADDICTIONS: AddictionDef[] = [
   {
     id: 'social',
     label: 'Social media',
-    emoji: '📱',
     defaultDailySpend: 0,
     defaultMinutesPerDay: 120,
     recovery: genericRecovery
@@ -46,7 +42,6 @@ export const ADDICTIONS: AddictionDef[] = [
   {
     id: 'gaming',
     label: 'Gaming',
-    emoji: '🎮',
     defaultDailySpend: 50,
     defaultMinutesPerDay: 150,
     recovery: genericRecovery
@@ -54,7 +49,6 @@ export const ADDICTIONS: AddictionDef[] = [
   {
     id: 'smoking',
     label: 'Smoking / vaping',
-    emoji: '🚭',
     defaultDailySpend: 120,
     defaultMinutesPerDay: 40,
     recovery: [
@@ -68,7 +62,6 @@ export const ADDICTIONS: AddictionDef[] = [
   {
     id: 'alcohol',
     label: 'Alcohol',
-    emoji: '🍃',
     defaultDailySpend: 300,
     defaultMinutesPerDay: 60,
     recovery: [
@@ -82,7 +75,6 @@ export const ADDICTIONS: AddictionDef[] = [
   {
     id: 'gambling',
     label: 'Gambling / betting',
-    emoji: '🎲',
     defaultDailySpend: 500,
     defaultMinutesPerDay: 90,
     recovery: genericRecovery
@@ -90,7 +82,6 @@ export const ADDICTIONS: AddictionDef[] = [
   {
     id: 'junkfood',
     label: 'Junk food',
-    emoji: '🍩',
     defaultDailySpend: 200,
     defaultMinutesPerDay: 30,
     recovery: genericRecovery
@@ -98,7 +89,6 @@ export const ADDICTIONS: AddictionDef[] = [
   {
     id: 'shopping',
     label: 'Compulsive shopping',
-    emoji: '🛍️',
     defaultDailySpend: 400,
     defaultMinutesPerDay: 45,
     recovery: genericRecovery
@@ -106,7 +96,6 @@ export const ADDICTIONS: AddictionDef[] = [
   {
     id: 'procrastination',
     label: 'Procrastination',
-    emoji: '⏳',
     defaultDailySpend: 0,
     defaultMinutesPerDay: 120,
     recovery: genericRecovery
