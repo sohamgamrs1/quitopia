@@ -165,7 +165,7 @@ export default function SosPage() {
                 onClick={() => setAction(action === id ? null : id)}
                 className={cn(
                   'surface p-4 text-left transition-all hover:-translate-y-0.5',
-                  action === id && 'ring-2 ring-teal'
+                  action === id && 'ring-2 ring-forest-500/50'
                 )}
               >
                 <div className="flex items-center gap-2">
