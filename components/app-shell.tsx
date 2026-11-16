@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import {
   BarChart3,
   BookOpen,
+  Globe,
   HeartHandshake,
   Home,
   LifeBuoy,
@@ -22,6 +23,7 @@ import { LeafMark } from './icons';
 const NAV = [
   { href: '/dashboard', label: 'Dashboard', icon: Home },
   { href: '/blocker', label: 'Blocker', icon: Shield },
+  { href: '/setup', label: 'Real blocking', icon: Globe },
   { href: '/sos', label: 'Urge SOS', icon: LifeBuoy },
   { href: '/journal', label: 'Journal', icon: PenLine },
   { href: '/stats', label: 'Insights', icon: BarChart3 },
