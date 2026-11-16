@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Globe, KeyRound, Lock, Plus, Search, Shield, Trash2 } from 'lucide-react';
+import Link from 'next/link';
+import { Download, Globe, KeyRound, Lock, Plus, Search, Shield, ShieldCheck, Trash2 } from 'lucide-react';
 import { PageHeader } from '@/components/page-header';
 import { BlockScreen } from '@/components/block-screen';
 import { Pomodoro } from '@/components/pomodoro';
@@ -53,6 +54,37 @@ export default function BlockerPage() {
     return h > 0 ? `${h}h ${m}m left` : `${m}m left`;
   };
 
+  /**
+   * Builds the JSON the Chrome extension imports. Everything the extension needs and
+   * nothing else — no journal, no streak, no profile.
+   */
+  const exportForExtension = () => {
+    const presetDomains = BLOCKLISTS.flatMap((list) => list.domains);
+    const presetKeywords = BLOCKLISTS.flatMap((list) => list.keywords);
+    const customDomains = blocker.rules.filter((r) => r.type === 'url').map((r) => r.value);
+    const customKeywords = blocker.rules.filter((r) => r.type === 'keyword').map((r) => r.value);
+
+    const payload = {
+      type: 'quitopia-blocker',
+      version: 1,
+      domains: Array.from(new Set([...presetDomains, ...customDomains].map(normaliseHost))).filter(Boolean),
+      keywords: Array.from(new Set([...presetKeywords, ...customKeywords])).filter(Boolean),
+      allowlist: blocker.allowlist,
+      safeSearch: blocker.safeSearch,
+      youtubeRestricted: blocker.youtubeRestricted,
+      mode: blocker.mode,
+      schedule: blocker.schedule
+    };
+
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = 'quitopia-blocker.json';
+    anchor.click();
+    URL.revokeObjectURL(url);
+  };
+
   const runTest = () => {
     if (!testValue.trim()) return;
     const result = evaluate(testValue, {
@@ -82,6 +114,31 @@ export default function BlockerPage() {
           </Badge>
         }
       />
+
+      <Card>
+        <CardContent className="flex flex-wrap items-center justify-between gap-4 pt-6">
+          <div className="flex items-start gap-3">
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-forest-900 text-mint-300">
+              <ShieldCheck className="h-[18px] w-[18px]" strokeWidth={1.8} />
+            </span>
+            <div>
+              <p className="text-[15px] font-bold tracking-tight">Make it real</p>
+              <p className="muted mt-0.5 max-w-xl text-[12.5px] leading-relaxed">
+                The tester below only checks your rules. To stop sites loading for real, install
+                the extension or set Private DNS — both take under five minutes.
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Link href="/setup">
+              <Button size="sm">Setup guide</Button>
+            </Link>
+            <Button size="sm" variant="outline" onClick={exportForExtension}>
+              <Download className="h-4 w-4" /> Export for the extension
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
 
       {locked ? (
         <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-100">
@@ -419,4 +476,4 @@ export default function BlockerPage() {
       </p>
     </div>
   );
-              }
+}
