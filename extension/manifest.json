@@ -1,9 +1,10 @@
 {
   "manifest_version": 3,
   "name": "Quitopia Blocker",
-  "version": "1.0.0",
-  "description": "Local-only site and keyword blocker that pairs with the Quitopia web app. No account, no analytics, no network calls.",
-  "permissions": ["storage", "declarativeNetRequest"],
+  "version": "2.0.0",
+  "description": "Real, local-only website blocking for Chrome, Edge and Brave. Blocks your list in every tab, enforces safe search, and never sends anything anywhere.",
+  "minimum_chrome_version": "101",
+  "permissions": ["storage", "declarativeNetRequest", "alarms"],
   "host_permissions": ["<all_urls>"],
   "background": { "service_worker": "background.js" },
   "action": {
@@ -20,6 +21,7 @@
   "web_accessible_resources": [
     { "resources": ["block.html"], "matches": ["<all_urls>"] }
   ],
+  "incognito": "split",
   "icons": {
     "16": "icon-16.png",
     "48": "icon-48.png",

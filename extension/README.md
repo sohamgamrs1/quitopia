@@ -1,42 +1,63 @@
-# Quitopia Blocker — Chrome extension
+# Quitopia Blocker — Chrome / Edge / Brave extension
 
-A local-only companion to the Quitopia web app. It blocks domains and keyword-laden pages
-using `declarativeNetRequest`. No network calls, no analytics, no account.
+Real website blocking, done locally. Requests are dropped by the browser's own
+`declarativeNetRequest` engine **before the page loads**, so a blocked site never renders,
+in any tab, in normal or incognito windows (if you allow it).
 
-## Load it
+No network calls, no analytics, no account, no remote list. Everything lives in
+`chrome.storage.sync`.
 
-1. Open `chrome://extensions`.
-2. Turn on **Developer mode** (top right).
+## Install (2 minutes)
+
+1. Open `chrome://extensions` (or `edge://extensions`, `brave://extensions`).
+2. Turn on **Developer mode**.
 3. Click **Load unpacked** and select this `extension/` folder.
-4. Pin the extension, open the popup, and paste your blocklist — one domain per line.
+4. Pin the extension, open the popup, and paste your blocklist — or import the JSON from
+   the Quitopia app (**Blocker → Export for the extension**).
+5. In the extension's details page, enable **Allow in incognito** if you want it to apply
+   there too.
 
-## What it does
+To publish it later, zip this folder and upload it at
+[chrome.google.com/webstore/devconsole](https://chrome.google.com/webstore/devconsole)
+(one-time $5 developer fee).
 
-| Feature | How |
+## What it actually does
+
+| Rule | Effect |
 |---|---|
-| Domain blocking | `declarativeNetRequest` dynamic rules redirect matched top-level navigations to `block.html` |
-| Safe search | Rewrites Google searches to `forcesafesearch.google.com` |
-| Keyword guard | `content.js` scans page text and overlays the block screen on a match |
-| Settings sync | `chrome.storage.sync`, so your list follows your Chrome profile |
+| Blocklist mode | Matched domains redirect to `block.html` — the 60-second breathing screen |
+| Allowlist mode | Every top-level navigation is blocked except your allowlist |
+| Focus hours | Blocking only inside a time window, re-checked every minute by an alarm |
+| Safe search | Google → `forcesafesearch.google.com`, Bing → `strict.bing.com`, DDG → `safe.duckduckgo.com` |
+| YouTube | `youtube.com` → `restrict.youtube.com`, path and query preserved |
+| Keyword guard | A content script scans page text and overlays the block screen on a match |
 
-## Getting your list across from the web app
+## Syncing with the Quitopia app
 
-The web app keeps its data in `localStorage`, which an extension cannot read. Two options:
+The web app cannot write to `chrome.storage`, and this extension cannot read the app's
+`localStorage`. The handoff is a file:
 
-1. **Copy the list**: open the app's Blocker page, select your custom rules, and paste them into
-   the popup.
-2. **Export / import**: the popup has *Export settings as JSON*, and the app exports its own JSON
-   from Settings. Both files are plain text — reconcile them by hand once.
+1. In the app: **Blocker → Export for the extension** — downloads `quitopia-blocker.json`.
+2. In the popup: **Import from Quitopia (.json)**.
 
-A direct handoff would need a native messaging host or a server, and both are out of scope for a
-local-only build.
+Both directions are supported: the popup can also **Export settings** in the same format.
+
+## Limits, stated plainly
+
+- It blocks in **this browser only**. Other browsers, other apps and your phone's other
+  apps are untouched — for that you need DNS-level blocking, which the app's
+  **Real blocking** page walks you through.
+- It cannot stop a user who disables or removes the extension. Nothing installed on a
+  machine the user controls can.
+- Keyword scanning only sees text already rendered on the page.
+- Safe-search redirects cover the search results page, not results embedded in other sites.
 
 ## Files
 
 ```
-manifest.json   MV3 manifest
+manifest.json   MV3 manifest (declarativeNetRequest, alarms, storage)
 background.js   builds and refreshes the dynamic rules
-popup.html/js   the settings UI
+popup.html/js   the settings UI and the app-JSON importer
 content.js      keyword guard overlay
 block.html/js   the block screen with a 60-second delay
 ```
